@@ -9,7 +9,7 @@ import lombok.*;
 
 @Data
 @Entity
-public class N5 {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -28,9 +28,9 @@
 <!--body안에 있는 태그를 사용해주세요.컨트롤러랑 연결되있는거라 지우면 db에 저장이 안됩니다!-->
 <body>
 <div class="layout">
-  <form th:action="@{/n5/update/{id}(id = ${n5.id})}" method="post">
-    <input name="name" type="text" th:value="${n5.name}">
-    <textarea name="content" th:text="${n5.content}"></textarea>
+  <form th:action="@{/comment/update/{id}(id = ${comment.id})}" method="post">
+    <input name="name" type="text" th:value="${comment.name}">
+    <textarea name="content" th:text="${comment.content}"></textarea>
     <button type="submit">수정 완료</button>
   </form>
 </div>
