@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--밑에 xmlns:th="http://www.thymeleaf.org"는 그대로 사용해주세요!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>From</title>
+</head>
+<style>
+    .layout{
+        width:500px;
+        margin:0 auto;
+        margin-top:40px;
+    }
+
+    .layout input{
+        width:100%;
+        box-size :border-box
+    }
+
+    .layout textarea{
+        width:100%
+        margin-top:10px;
+        min-height:300px;
+
+    }
+</style>
+
+<!--body안에 있는 태그를 사용해주세요.컨트롤러랑 연결되있는거라 지우면 db에 저장이 안됩니다!-->
+<body>
+<div class="layout">
+  <form th:action="@{/n5/update/{id}(id = ${n5.id})}" method="post">
+    <input name="name" type="text" th:value="${n5.name}">
+    <textarea name="content" th:text="${n5.content}"></textarea>
+    <button type="submit">수정 완료</button>
+  </form>
+</div>
+</body>
+</html>

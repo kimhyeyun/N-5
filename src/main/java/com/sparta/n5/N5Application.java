@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class N5Application {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(N5Application.class, args);
 	}
 

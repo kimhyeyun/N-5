@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>From</title>
+</head>
+<style>
+    .layout{
+        width:500px;
+        margin:0 auto;
+        margin-top:40px;
+    }
+
+    .layout input{
+        width:100%;
+        box-size :border-box
+    }
+
+    .layout textarea{
+        width:100%
+        margin-top:10px;
+        min-height:300px;
+
+    }
+</style>
+
+<!--body안에 있는 태그를 사용해주세요.컨트롤러랑 연결되있는거라 지우면 db에 저장이 안됩니다!-->
+<body>
+<div class="layout">
+    <form action="/n5/writepro" method="post">
+        <input name="name" type="text">
+        <textarea name="content"></textarea>
+        <button type="submit">작성</button>
+    </form>
+</div>
+</body>
+</html>
