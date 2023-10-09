@@ -12,22 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
+    @Autowired private CommentService commentService;
 
     //내용 입력하는 처음 화면
-    @GetMapping("/n5/") //localhost:8080/
+    @GetMapping("/") //localhost:8080/
     public String commentWriteForm(){
         return "comment-write";
     }
 
     //데이터 베이스에 내용 저장
-    @PostMapping("/member/{memberName}/")
-    public String saveComment(Comment comment){
+    @GetMapping("/save/comment/")
+    public void saveComment(Comment comment){
 
-        commentService.write(comment);
-
-        return "";
+        commentService.write();
     }
 
     //글 리스트들 가져오기
@@ -43,14 +40,14 @@ public class CommentController {
     @GetMapping("n5/delete")
     public String deleteComment(Long id){
 
-        commentService.commentDelete(id);
+//        commentService.commentDelete(id);
         return "redirect:/n5/list";
     }
 
     //수정할때 해당 글 불러오기용
     @GetMapping("/n5/view")
     public String commentsView(Model model,Long id){
-        model.addAttribute("n5",commentService.commentView(id));
+//        model.addAttribute("n5",commentService.commentView(id));
         return "n5view";
     }
 
@@ -58,7 +55,7 @@ public class CommentController {
     @GetMapping("/n5/modify/{id}")
     public String updateComment(@PathVariable("id") Long id, Model model){
 
-        model.addAttribute("n5",commentService.commentView(id));
+//        model.addAttribute("n5",commentService.commentView(id));
 
         return "n5modify";
     }
@@ -67,11 +64,11 @@ public class CommentController {
     public String updateComment(@PathVariable("id") Long id, Comment comment){
 
         //n5Temp에 수정전에 있던 내용을 n5로 n5Temp에 수정한 내용 변경하기
-        Comment commentTemp =commentService.commentView(id);
-        commentTemp.setName(comment.getName());
-        commentTemp.setContent(comment.getContent());
-
-        commentService.write(commentTemp);
+//        Comment commentTemp =commentService.commentView(id);
+//        commentTemp.setName(comment.getName());
+//        commentTemp.setContent(comment.getContent());
+//
+//        commentService.write(commentTemp);
 
         return "redirect:/n5/list";
     }
