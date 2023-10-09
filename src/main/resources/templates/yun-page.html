@@ -25,6 +25,7 @@
             <h1>🙋‍♀️Memory Book 🙋</h1>
 
             <form class="mb-3 comment-form" action="/comment" method="post">
+                <input name="memberName" hidden="hidden" type="text" readonly th:value="yun">
                 <div class="form-floating mb-3">
                     <input name="name" class="form-control" type="text" id="name" placeholder="이름">
                     <label for="name">이름</label>
@@ -38,12 +39,12 @@
                 </div>
             </form>
 
-            <div class="card w-30 mb-3">
-                <div class="card-body" th:each="comment : ${list}">
+            <div class="card mb-3" th:each="comment : ${list}">
+                <div class="card-body">
                     <p class="card-text fs-4" th:text="${comment.content}"></p>
-                    <p class="card-text ps-3" th:text="-${comment.name}"></p>
+                    <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
                     <a href="#" class="btn btn-dark">수정</a>
-                    <a href="#" class="btn btn-danger">삭제</a>
+                    <a th:href="'/comments/' + ${comment.id}" class="btn btn-danger">삭제</a>
                 </div>
             </div>
 
