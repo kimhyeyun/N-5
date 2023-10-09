@@ -9,32 +9,78 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
-public class CommentController {
+public class MainController {
 
     @Autowired private CommentService commentService;
 
     //내용 입력하는 처음 화면
     @GetMapping("/") //localhost:8080/
-    public String commentWriteForm(){
-        return "comment-write";
+    public String home(){
+        return "index";
     }
 
     //데이터 베이스에 내용 저장
-    @GetMapping("/save/comment/")
+    @GetMapping("/comment")
     public void saveComment(Comment comment){
-
-        commentService.write();
+        commentService.write(comment);
     }
 
-    //글 리스트들 가져오기
-    @GetMapping("/n5/list")
-    public String commentList(Model model){
+    /*  TODO: 개인 페이지 별 호출할 예정 -> 각자 이름 작성 해주세요*/
 
-        model.addAttribute("list",commentService.commentsList());
+    // 개인 페이지
+    @GetMapping("/m2bi")
+    public String m2biPage(Model model){
 
-        return "n5list";
+        List<Comment> comments = commentService.commentsList("m2bi");
+        model.addAttribute("list", comments);
+
+        return "m2bi-page";
     }
+
+
+    // 개인 페이지
+    @GetMapping("/seok")
+    public String seokPage(Model model){
+
+        List<Comment> comments = commentService.commentsList("seok");
+        model.addAttribute("list", comments);
+
+        return "seok-page";
+    }
+
+    // 개인 페이지
+    @GetMapping("/c1")
+    public String c1Page(Model model){
+
+        List<Comment> comments = commentService.commentsList("c1");
+        model.addAttribute("list", comments);
+
+        return "c1-page";
+    }
+
+    // 개인 페이지
+    @GetMapping("/rinyejo")
+    public String rinyejoPage(Model model){
+
+        List<Comment> comments = commentService.commentsList("rinyejo");
+        model.addAttribute("list", comments);
+
+        return "rinyejo-page";
+    }
+
+    // 개인 페이지
+    @GetMapping("/yun")
+    public String yunPage(Model model){
+
+        List<Comment> comments = commentService.commentsList("yun");
+        model.addAttribute("list", comments);
+
+        return "yun-page";
+    }
+
 
     //글 삭제
     @GetMapping("n5/delete")

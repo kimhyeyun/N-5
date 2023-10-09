@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -40,18 +40,9 @@
             </form>
 
             <div class="card w-30 mb-3">
-                <div class="card-body">
-                    <p class="card-text fs-4">With supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text ps-3">-누구누구</p>
-                    <a href="#" class="btn btn-dark">수정</a>
-                    <a href="#" class="btn btn-danger">삭제</a>
-                </div>
-            </div>
-
-            <div class="card w-30 mb-3">
-                <div class="card-body">
-                    <p class="card-text fs-4">With supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text ps-3">-누구누구</p>
+                <div class="card-body" th:each="comment : ${list}">
+                    <p class="card-text fs-4" th:text="${comment.content}"></p>
+                    <p class="card-text ps-3" th:text="-${comment.name}"></p>
                     <a href="#" class="btn btn-dark">수정</a>
                     <a href="#" class="btn btn-danger">삭제</a>
                 </div>
