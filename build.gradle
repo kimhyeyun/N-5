@@ -29,15 +29,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'mysql:mysql-connector-java:8.0.28'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	implementation 'com.google.firebase:firebase-admin:9.2.0'
 	implementation group: 'com.google.auto.value', name: 'auto-value', version: '1.10.4'
-
-
-
-
 }
 
 tasks.named('test') {
