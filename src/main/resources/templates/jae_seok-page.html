@@ -47,8 +47,7 @@
                 <p class="card-text fs-4" th:text="${comment.content}"></p>
                 <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
                 <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">수정</button>
-                <a th:href="'/comments/' + ${comment.id}" class="btn btn-danger">삭제</a>
-
+                <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
             </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
