@@ -29,10 +29,7 @@ public class MainController {
         return "redirect:/" + comment.getMemberName();
     }
 
-    /*  TODO: 개인 페이지 별 호출할 예정 -> 각자 이름 작성 해주세요*/
-
     // 개인 페이지
-
     @GetMapping("/{memberName}")
     public String yunPage(@PathVariable String memberName, Model model){
 
