@@ -5,9 +5,7 @@ import com.sparta.n5.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,8 +37,15 @@ public class MainController {
         return memberName + "-page";
     }
 
-
     //글 삭제
+    /* js 버전 */
+/*    @ResponseBody
+    @DeleteMapping("/comment")
+    public void deleteComment(@RequestBody Comment comment){
+        commentService.commentDelete(comment.getMemberName(), comment.getName().substring(1));
+    }*/
+
+
     @GetMapping("/comments/{memberName}/{name}")
     public String deleteComment(@PathVariable String memberName, @PathVariable String name){
         commentService.commentDelete(memberName,name);
