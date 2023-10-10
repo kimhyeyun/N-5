@@ -11,14 +11,16 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/member-page.css">
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 <body>
 
 <div class="wrap justify-content-center d-flex">
     <div class="member-intro">
         <div class="member-image"><img src="/image/a.jpg" alt=""/></div>
         <div class="member-content">
-            <h2>이름</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <h2>최재석</h2>
+            <p></p>
         </div>
     </div>
     <div class="memory-book justify-content-center d-flex">
@@ -26,7 +28,7 @@
 
         <form class="mb-3 comment-form" action="/comment" method="post">
             <!-- TODO: 각자 db 및 url 로 설정할 이름 넣어주세요!-->
-            <input name="memberName" hidden="hidden" type="text" readonly th:value="">
+            <input name="memberName" hidden="hidden" type="text" readonly th:value="jae_seok">
             <div class="form-floating mb-3">
                 <input name="name" class="form-control" type="text" id="name" placeholder="이름">
                 <label for="name">이름</label>
@@ -45,7 +47,7 @@
                 <p class="card-text fs-4" th:text="${comment.content}"></p>
                 <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
                 <a href="#" class="btn btn-dark">수정</a>
-                <a th:href="'/comments/' + ${comment.id}" class="btn btn-danger">삭제</a>
+                <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
             </div>
         </div>
 
