@@ -45,9 +45,9 @@ public class MainController {
 
 
     //글 삭제
-    @GetMapping("/comments/{id}")
-    public String deleteComment(@PathVariable Long id){
-        String memberName = commentService.commentDelete(id);
+    @GetMapping("/comments/{memberName}/{name}")
+    public String deleteComment(@PathVariable String memberName, @PathVariable String name){
+        commentService.commentDelete(memberName,name);
 
         return "redirect:/" + memberName;
     }
