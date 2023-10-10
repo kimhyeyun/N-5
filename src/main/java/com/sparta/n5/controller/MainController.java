@@ -31,7 +31,7 @@ public class MainController {
 
     // 개인 페이지
     @GetMapping("/{memberName}")
-    public String yunPage(@PathVariable String memberName, Model model){
+    public String MemberPage(@PathVariable String memberName, Model model){
 
         List<Comment> comments = commentService.commentsList(memberName);
         model.addAttribute("list", comments);
