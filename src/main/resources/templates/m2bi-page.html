@@ -55,7 +55,11 @@
             <div class="card-body">
                 <p class="card-text fs-4" th:text="${comment.content}"></p>
                 <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
+<<<<<<< HEAD
                 <a href="#" class="btn btn-dark">수정</a>
+=======
+                <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">수정</button>
+>>>>>>> main
                 <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
             </div>
 
