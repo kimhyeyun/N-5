@@ -46,7 +46,7 @@
                 <p class="card-text fs-4" th:text="${comment.content}"></p>
                 <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
                 <a href="#" class="btn btn-dark">수정</a>
-                <a th:href="'/comments/' + ${comment.id}" class="btn btn-danger">삭제</a>
+                <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
             </div>
         </div>
 
