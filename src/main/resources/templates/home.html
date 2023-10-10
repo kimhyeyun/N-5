@@ -37,7 +37,7 @@
 			  height: 450px;
   			  margin-top: 200px;
   			  margin-left: 80px;
-			  width: 90%;
+
 			  text-align: center;
 
 
@@ -48,8 +48,33 @@
 
 			}
 
+            .container {
+                height: 450px;
+  			  margin-top: 200px;
+  			  margin-left: 80px;
+			  width: 80%;
+			  text-align: center;
+			}
+
+			.button {
+              position: absolute;
+              top:50%;
+              background-color:#white;
+              color: #fff;
+              border-color: white;
+              border:none;
+}
+
 
         </style>
+    <script>
+        function bg(){
+            location.reload();
+
+        }
+
+    </script>
+
 </head>
 <body>
     <div class="navbar">
@@ -57,15 +82,15 @@
             <img src=""   >
         </a>
         <ul>
-            <li><a href="/templates/main.html" class="nav-link px-2 text-">[N-5]</a></li>
+            <li><button onclick="bg()"><a>N-5</a></button></li>
             <li><a href="#">300</a></li>
-            <li><a href="#">MEMBER</a></li>
+            <li><a href="/templates/member.html">MEMBER</a></li>
             <li><a href="#">Contents</a></li>
             <li><a href="/templates/q.html">Q</a></li>
         </ul>
     </div>
 
-<img class="header" src="/images/">
+    <img class="container" src="/templates/int.jpg/" alt="">
 
 </body>
 </html>
