@@ -1,17 +1,16 @@
 package com.sparta.n5.service;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.protobuf.Api;
 import com.sparta.n5.entity.Comment;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
@@ -48,5 +47,10 @@ public class CommentService {
     public void commentDelete(String memberName, String name) {
         Firestore firestore = FirestoreClient.getFirestore();
         firestore.collection(memberName).document(name).delete();
+    }
+
+    public void update(Comment comment) {
+        Firestore firestore = FirestoreClient.getFirestore();
+        firestore.collection(comment.getMemberName()).document(comment.getName()).update("content", comment.getContent());
     }
 }

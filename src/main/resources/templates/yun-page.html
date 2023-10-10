@@ -10,6 +10,14 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/member-page.css">
+
+    <script>
+        function edit_comment(memberName, name) {
+            let editContent = $('#update-content').val();
+            fetch("/comments")
+
+        }
+    </script>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
@@ -44,8 +52,32 @@
                 <div class="card-body">
                     <p class="card-text fs-4" th:text="${comment.content}"></p>
                     <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
-                    <button class="btn btn-dark">수정</button>
+                    <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">수정</button>
                     <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="/comments/update">
+                                        <div class="mb-3">
+                                            <input name="memberName" hidden="hidden" type="text" readonly th:value="yun">
+                                            <input name="name" hidden="hidden" type="text" readonly th:value="${comment.name}">
+                                            <label for="content" class="col-form-label" >수정할 내용</label>
+                                            <textarea class="form-control" name="content"></textarea>
+                                        </div>
+                                        <button type="submit"  class="btn btn-dark">수정하기</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
