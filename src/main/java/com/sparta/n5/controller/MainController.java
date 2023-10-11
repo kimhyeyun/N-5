@@ -47,27 +47,20 @@ public class MainController {
     @GetMapping("/{memberName}")
     public String MemberPage(@PathVariable String memberName, Model model){
 
-        List<Comment> comments = commentService.commentsList(memberName);
-        model.addAttribute("list", comments);
+//        List<Comment> comments = commentService.commentsList(memberName);
+//        model.addAttribute("list", comments);
 
         return memberName + "-page";
     }
 
     //글 삭제
-    /* js 버전 */
-/*    @ResponseBody
+    @ResponseBody
     @DeleteMapping("/comment")
     public void deleteComment(@RequestBody Comment comment){
         commentService.commentDelete(comment.getMemberName(), comment.getName().substring(1));
-    }*/
-
-
-    @GetMapping("/comments/{memberName}/{name}")
-    public String deleteComment(@PathVariable String memberName, @PathVariable String name){
-        commentService.commentDelete(memberName,name);
-
-        return "redirect:/" + memberName;
     }
+
+
 
     @PostMapping("/comments/update")
     public String updateComment(Comment comment) {
