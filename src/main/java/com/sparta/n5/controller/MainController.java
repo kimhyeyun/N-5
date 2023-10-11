@@ -16,11 +16,27 @@ public class MainController {
 
     //내용 입력하는 처음 화면
     @GetMapping("/") //localhost:8080/
-    public String home(){
+    public String index(){
         return "index";
     }
 
+    @GetMapping("/home") //localhost:8080/
+    public String home(){
+        return "home";
+    }
+    @GetMapping("/member2") //localhost:8080/
+    public String member(){
+        return "member2";
+    }
     //데이터 베이스에 내용 저장
+    @GetMapping("/q") //localhost:8080/
+    public String q(){
+        return "q";
+    }
+    //데이터 베이스에 내용 저장
+
+
+
     @PostMapping("/comment")
     public String saveComment(Comment comment) {
         commentService.write(comment);
