@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -9,9 +9,105 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/member-page.css">
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // Firebase 구성 정보 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyB8yarJvf7iMOILVC2HNN4i3_i3vbsmM9Q",
+            authDomain: "team-n5.firebaseapp.com",
+            projectId: "team-n5",
+            storageBucket: "team-n5.appspot.com",
+            messagingSenderId: "490353232418",
+            appId: "1:490353232418:web:d021d88d98408747e2187b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let docs = await getDocs(collection(db, "jae_seok"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            let name = row['name'];
+            let content = row['content'];
+
+            let temp_html = `
+                 <div class="card mb-3">
+                <div class="card-body">
+                    <p class="card-text fs-4" id="del-content">${content}</p>
+                    <p class="card-text ps-3" id="del-name">-${name}</p>
+                    <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">수정</button>
+                    <button id="delete-btn" class="btn btn-danger delete-btn">삭제</button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="/comments/update">
+                                        <div class="mb-3">
+                                            <input name="memberName" hidden="hidden" type="text" readonly value="jae_seok">
+                                            <input name="name" hidden="hidden" type="text" readonly value="${name}">
+                                            <label for="content" class="col-form-label" >수정할 내용</label>
+                                            <textarea class="form-control" name="content"></textarea>
+                                        </div>
+                                        <button type="submit"  class="btn btn-dark">수정하기</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            `;
+
+            $('#memory-book').append(temp_html);
+        });
+
+
+        $("#delete-btn").click(async function () {
+            let name = $('#del-name').text();
+            let memberName = "jae_seok";
+            let content = $('#del-content').text();
+
+            let formData = new FormData();
+            formData.append("memberName", memberName);
+            formData.append("name", name);
+
+            const param = {
+                'memberName': memberName,
+                'name' : name,
+                'content': content
+            };
+
+            const option = {
+                method : 'DELETE',
+                headers:{
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(param)
+            };
+
+            await fetch('/comment', {
+                ...option
+            });
+
+            alert('삭제되었습니다');
+            window.location.reload();
+        });
+
+
+    </script>
 </head>
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
 <body>
 
@@ -23,12 +119,12 @@
             <p> 중간에 포기하지 않고 끝까지 할게요!</p>
         </div>
     </div>
-    <div class="memory-book justify-content-center d-flex">
+    <div class="memory-book justify-content-center d-flex" id="memory-book">
         <h1>🙋‍♀️Memory Book 🙋</h1>
 
         <form class="mb-3 comment-form" action="/comment" method="post" >
             <!-- TODO: 각자 db 및 url 로 설정할 이름 넣어주세요!-->
-            <input name="memberName" hidden="hidden" type="text" readonly th:value="jae_seok">
+            <input name="memberName" hidden="hidden" type="text" readonly value="jae_seok">
             <div class="form-floating mb-3">
                 <input name="name" class="form-control" type="text" id="name" placeholder="이름">
                 <label for="name">이름</label>
@@ -41,38 +137,6 @@
                 <button class="submit-button btn btn-dark" type="submit">작성</button>
             </div>
         </form>
-
-        <div class="card mb-3" th:each="comment : ${list}">
-            <div class="card-body" style="background-color:#FFF0F5;">
-                <p class="card-text fs-4" th:text="${comment.content}"></p>
-                <p class="card-text ps-3" th:text="'-' + ${comment.name}"></p>
-                <button class="btn btn-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">수정</button>
-                <a th:href="'/comments/'+${comment.memberName}+ '/' + ${comment.name}" class="btn btn-danger">삭제</a>
-            </div>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">수정하기</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" action="/comments/update">
-                                <div class="mb-3">
-                                    <input name="memberName" hidden="hidden" type="text" readonly th:value="jae_seok">
-                                    <input name="name" hidden="hidden" type="text" readonly th:value="${comment.name}">
-                                    <label for="content" class="col-form-label" >수정할 내용</label>
-                                    <textarea class="form-control" name="content"></textarea>
-                                </div>
-                                <button type="submit"  class="btn btn-dark">수정하기</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
