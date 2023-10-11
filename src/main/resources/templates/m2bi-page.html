@@ -14,16 +14,16 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 
-<div class="wrap justify-content-center d-flex">
-    <div class="member-intro">
+<div class="wrap justify-content-center d-flex" >
+    <div class="member-intro" style="background-color: #E3F6FD">
         <div class="member-image"><img src="/image/20231010.jpg" alt=""/></div>
         <div class="member-content">
             <h2>최준희</h2>
-            <p>팀 300 바지사장.
+            <p style="font-family: '맑은 고딕'">팀 300 바지사장.
                 <br>유투브 Playlist 제작, GoldWave 음원편집,
                 오피스를 통한 서류작업, 엑셀 함수사용,
                 파워포인트로 그래픽 작업, 발표 및 프레젠테이션,
-                리듬게임 패턴 제작, 보고서 및 레포트 피드백, OBS 방송셋팅 설정도우미, 블로그에 글쓰기 등등
+                <br>리듬게임 패턴 제작, 보고서 및 레포트 피드백, OBS 방송셋팅 설정도우미, 블로그에 글쓰기 등등
                 <br>다양한 취미활동과 업무를 해봤지만,
                 <br>이제는 두 번 실패했었던 개발자를 다시 도전하려고 합니다.
                 <br>코드만 보면 머리가 하얗게 변하는 코딩 못하는 전공자입니다.
@@ -72,7 +72,7 @@
                         <div class="modal-body">
                             <form method="post" action="/comments/update">
                                 <div class="mb-3">
-                                    <input name="memberName" hidden="hidden" type="text" readonly th:value="yun">
+                                    <input name="memberName" hidden="hidden" type="text" readonly th:value="m2bi">
                                     <input name="name" hidden="hidden" type="text" readonly th:value="${comment.name}">
                                     <label for="content" class="col-form-label" >수정할 내용</label>
                                     <textarea class="form-control" name="content"></textarea>
